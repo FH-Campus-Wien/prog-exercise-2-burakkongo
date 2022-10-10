@@ -1,8 +1,5 @@
 package at.ac.fhcampuswien;
 
-import jdk.internal.misc.ScopedMemoryAccess;
-import org.graalvm.compiler.phases.graph.ScheduledNodeIterator;
-
 import java.util.Scanner;
 
 public class App {
@@ -12,8 +9,8 @@ public class App {
 
         boolean status = false;
 
-        double current_number;
-        double max_number = 0;
+        double currentNumber;
+        double maxNumber = 0;
 
         int counter = 0;
 
@@ -22,28 +19,28 @@ public class App {
         do {
             counter++;
             System.out.print(("Number " + counter + ": "));
-            current_number = input.nextDouble();
+            currentNumber = input.nextDouble();
 
-            if ((current_number <= 0) && (counter == 1))
+            if ((currentNumber <= 0) && (counter == 1))
             {
                 status = false;
                 System.out.print("No number entered.");
                 System.out.println();
                 break;
             }
-            if ((current_number <= 0) && (!(counter == 1))) {
+            if ((currentNumber <= 0) && (counter != 1)) {
                 status = true;
                 break;
             }
-            if (current_number >= max_number)
+            if (currentNumber >= maxNumber)
             {
-                max_number = current_number;
+                maxNumber = currentNumber;
             }
 
-        }while(status == false);
+        }while(!status);
 
-        if ((status == true)) {
-            String s = String.format("%.2f", max_number);
+        if (status) {
+            String s = String.format("%.2f", maxNumber);
             System.out.println("The largest number is " + s);
         }
     }
@@ -107,15 +104,15 @@ public class App {
         char c = input.next().charAt(0);
         int remainder = h % 2;
 
-        if (!(remainder == 0)) {
+        if (remainder != 0) {
 
             if (h >= 0 && h % 2 != 0) {
 
-                int ascii_number = (int) c;
+                int asciiValue = c;
 
                 int center = h / 2;
 
-                int smallest_value = ascii_number - center;
+                int smallestValue = asciiValue - center;
 
                 for (int i = 0; i < h; i++) {
                     int x = 0;
@@ -130,20 +127,20 @@ public class App {
                         System.out.print(" ");
                     }
 
-                    int smallest_value_inLine = 0;
+                    int smallestValueInLine = 0;
 
                     if (i <= center) {
-                        smallest_value_inLine = ascii_number - i;
+                        smallestValueInLine = asciiValue - i;
                     } else {
-                        smallest_value_inLine = smallest_value + (i - center);
+                        smallestValueInLine = smallestValue + (i - center);
                     }
 
-                    for (int k = smallest_value_inLine; k <= ascii_number; k++) {
+                    for (int k = smallestValueInLine; k <= asciiValue; k++) {
 
                         System.out.print((char) k);
                     }
 
-                    for (int k = ascii_number - 1; k >= smallest_value_inLine; k--) {
+                    for (int k = asciiValue - 1; k >= smallestValueInLine; k--) {
 
                         System.out.print((char) k);
                     }
@@ -161,47 +158,47 @@ public class App {
     //todo Task 5
     public void marks(){
 
-        int negative_marks = 0;
-        int length_counter = 0;
-        int mark_sum = 0;
-        int current_number;
-        float average = 0;
+        int negativeMarks = 0;
+        int lengthCounter = 0;
+        int marksSum = 0;
+        int currentNumber;
+        float average;
 
         Scanner input = new Scanner(System.in);
 
         do
         {
-            System.out.print("Mark "+(length_counter+1)+": ");
-            current_number = input.nextInt();
+            System.out.print("Mark "+(lengthCounter+1)+": ");
+            currentNumber = input.nextInt();
 
-            if (current_number == 0) {
+            if (currentNumber == 0) {
                 break;
             }
-            else if(current_number < 0 || current_number > 5) {
+            else if(currentNumber < 0 || currentNumber > 5) {
                 System.out.println("Invalid mark!");
                 continue;
 
             } else {
-                if(current_number == 5) {
-                    mark_sum += current_number;
-                    length_counter += 1;
-                    negative_marks += 1;
+                if(currentNumber == 5) {
+                    marksSum += currentNumber;
+                    lengthCounter += 1;
+                    negativeMarks += 1;
                 }
                 else{
-                    mark_sum += current_number;
-                    length_counter += 1;
+                    marksSum += currentNumber;
+                    lengthCounter += 1;
                 }
             }
             System.lineSeparator();
-        }while(current_number != 0);
+        }while(currentNumber != 0);
 
         // increasing counter to not divide by 0 if length counter is 0 due to invalid input
-        if(length_counter == 0) length_counter+=1;
+        if(lengthCounter == 0) lengthCounter+=1;
 
-        average = mark_sum/(float)length_counter;
+        average = marksSum/(float)lengthCounter;
 
         System.out.println("Average: " + String.format("%.2f",average));
-        System.out.println("Negative marks: " + negative_marks);
+        System.out.println("Negative marks: " + negativeMarks);
 
     }
 
@@ -211,14 +208,14 @@ public class App {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("n: ");
-        int start_number = scanner.nextInt();
+        int startNumber = scanner.nextInt();
         int sum = 0;
-        int current_number = start_number;
+        int currentNumber = startNumber;
 
         while(sum != 1 && sum != 4)
         {
-            String numberString = "" + current_number;
-            if (current_number/100>0)
+            String numberString = "" + currentNumber;
+            if (currentNumber/100>0)
             {
                 char firstChar = numberString.charAt(0);
                 int firstDigit = Integer.parseInt("" + firstChar);
@@ -229,7 +226,7 @@ public class App {
 
                 sum = firstDigit*firstDigit + secondDigit*secondDigit + thirdDigit*thirdDigit;
             }
-            else if (current_number/10>0)
+            else if (currentNumber/10>0)
             {
                 char firstChar = numberString.charAt(0);
                 int firstDigit = Integer.parseInt("" + firstChar);
@@ -244,7 +241,7 @@ public class App {
                 int firstDigit = Integer.parseInt("" + firstChar);
                 sum = firstDigit*firstDigit;
             }
-            current_number = sum;
+            currentNumber = sum;
 
         }
         if(sum == 1) System.out.println("Happy number!");
